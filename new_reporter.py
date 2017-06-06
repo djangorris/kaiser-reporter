@@ -14,7 +14,7 @@ from selenium.common.exceptions import NoAlertPresentException
 from selenium.webdriver.chrome.options import Options
 import time
 
-from . import secret
+from secret import username, password
 
 url = "https://clear.kaiserpermanente.org/?kp_shortcut_referrer=kp.org/clear#/login"
 driver = webdriver.Firefox()
@@ -37,33 +37,33 @@ time.sleep(3)
 client_list = []
 html = driver.execute_script("return document.documentElement.outerHTML")
 sel_soup = BeautifulSoup(html, 'html.parser')
-clients = sel_soup.find_all("div", class_="name")
+clients = sel_soup.find_all("a", class_="ng-binding")
 for client in clients:
-    client_list.append(clients)
+    client_list.append(client)
 time.sleep(1)
 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 html = driver.execute_script("return document.documentElement.outerHTML")
 sel_soup = BeautifulSoup(html, 'html.parser')
-clients = sel_soup.find_all("div", class_="name")
+clients = sel_soup.find_all("a", class_="ng-binding")
 for client in clients:
     if client not in client_list:
-        client_list.append(clients)
+        client_list.append(client)
 time.sleep(1)
 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 html = driver.execute_script("return document.documentElement.outerHTML")
 sel_soup = BeautifulSoup(html, 'html.parser')
-clients = sel_soup.find_all("div", class_="name")
+clients = sel_soup.find_all("a", class_="ng-binding")
 for client in clients:
     if client not in client_list:
-        client_list.append(clients)
+        client_list.append(client)
 time.sleep(1)
 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 html = driver.execute_script("return document.documentElement.outerHTML")
 sel_soup = BeautifulSoup(html, 'html.parser')
-clients = sel_soup.find_all("div", class_="name")
+clients = sel_soup.find_all("a", class_="ng-binding")
 for client in clients:
     if client not in client_list:
-        client_list.append(clients)
+        client_list.append(client)
 time.sleep(1)
 print(len(client_list))
 time.sleep(2)
