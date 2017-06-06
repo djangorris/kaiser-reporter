@@ -68,8 +68,7 @@ html = driver.execute_script("return document.documentElement.outerHTML")
 sel_soup = BeautifulSoup(html, 'html.parser')
 clients = sel_soup.find_all("div", class_="name")
 for client in clients:
-    title = client.findAll('a', {'class': 'ng-binding'})[0].text.strip(" /n/t/r")
-    title = title.strip(" \n")
+    title = client.findAll('a', {'class': 'ng-binding'})[0].text.strip(" /n/t/r\n")
     if title not in client_list:
         client_list.append(title)
 time.sleep(1)
