@@ -37,35 +37,43 @@ time.sleep(3)
 client_list = []
 html = driver.execute_script("return document.documentElement.outerHTML")
 sel_soup = BeautifulSoup(html, 'html.parser')
-clients = sel_soup.find_all("a", class_="ng-binding")
+clients = sel_soup.find_all("div", class_="name")
 for client in clients:
-    client_list.append(client)
+    title = client.findAll('a', {'class': 'ng-binding'})[0].text.strip(" /n/t/r")
+    title = title.strip(" \n")
+    client_list.append(title)
 time.sleep(1)
 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 html = driver.execute_script("return document.documentElement.outerHTML")
 sel_soup = BeautifulSoup(html, 'html.parser')
-clients = sel_soup.find_all("a", class_="ng-binding")
+clients = sel_soup.find_all("div", class_="name")
 for client in clients:
-    if client not in client_list:
-        client_list.append(client)
+    title = client.findAll('a', {'class': 'ng-binding'})[0].text.strip(" /n/t/r")
+    title = title.strip(" \n")
+    if title not in client_list:
+        client_list.append(title)
 time.sleep(1)
 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 html = driver.execute_script("return document.documentElement.outerHTML")
 sel_soup = BeautifulSoup(html, 'html.parser')
-clients = sel_soup.find_all("a", class_="ng-binding")
+clients = sel_soup.find_all("div", class_="name")
 for client in clients:
-    if client not in client_list:
-        client_list.append(client)
+    title = client.findAll('a', {'class': 'ng-binding'})[0].text.strip(" /n/t/r")
+    title = title.strip(" \n")
+    if title not in client_list:
+        client_list.append(title)
 time.sleep(1)
 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 html = driver.execute_script("return document.documentElement.outerHTML")
 sel_soup = BeautifulSoup(html, 'html.parser')
-clients = sel_soup.find_all("a", class_="ng-binding")
+clients = sel_soup.find_all("div", class_="name")
 for client in clients:
-    if client not in client_list:
-        client_list.append(client)
+    title = client.findAll('a', {'class': 'ng-binding'})[0].text.strip(" /n/t/r")
+    title = title.strip(" \n")
+    if title not in client_list:
+        client_list.append(title)
 time.sleep(1)
-print(len(client_list))
+print("There are " + str(len(client_list)) + " clients.")
 time.sleep(2)
 print(client_list)
 
