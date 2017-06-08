@@ -19,6 +19,7 @@ from smtplib import SMTP, SMTPAuthenticationError, SMTPException
 import time
 
 from secret import kaiser_username, kaiser_password, host, port, username, password, from_email, to_list
+from templates import get_template_path, get_template, render_context
 
 url = "https://clear.kaiserpermanente.org/?kp_shortcut_referrer=kp.org/clear#/login"
 driver = webdriver.Firefox()
@@ -73,8 +74,8 @@ for client in clients:
     if title not in client_list:
         client_list.append(title)
 num_clients = len(client_list)
-print("There are {} families.".format(num_clients))
-print(client_list)
+# print("There are {} families.".format(num_clients))
+# print(client_list)
 
 # try:
 email_conn = smtplib.SMTP(host, port)
@@ -85,21 +86,33 @@ the_msg = MIMEMultipart('alternative')
 the_msg['Subject'] = "Kaiser client update"
 the_msg['From'] = from_email
 
+###
+file_ = 'templates/email_message.txt'
+# file_html = 'templates/email_message.html'
+template = get_template(file_)
+# template_html = get_template(file_html)
+context = {
+    "num_clients": num_clients,
+    "client_list": client_list,
+}
+###
 
-plain_txt = "There are {} families.".format(num_clients)
-html_txt = '''\
-<html>
-    <head></head>
-    <body>
-        <p>"Testing."</p>
-    </body>
-</html>
-'''
-part_1 = MIMEText(plain_txt, 'plain')
-part_2 = MIMEText(html_txt, "html")
-the_msg.attach(part_1)
-the_msg.attach(part_2)
-email_conn.sendmail(from_email, to_list, the_msg.as_string())
+
+# plain_txt = "There are {} families.".format(num_clients)
+# html_txt = '''\
+# <html>
+#     <head></head>
+#     <body>
+#         <p>"Testing."</p>
+#     </body>
+# </html>
+# '''
+# part_1 = MIMEText(file_, 'plain')
+# the_msg.attach(part_1)
+# the_msg.attach(part_2)
+the_msg = render_context(template, context)
+# the_msg = render_context(template_html, context)
+email_conn.sendmail(from_email, to_list, the_msg)
 email_conn.quit()
 # except smtplib.SMTPException:
 #     print("error sending message")

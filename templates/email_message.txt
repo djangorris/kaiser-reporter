@@ -1,0 +1,4 @@
+There are {num_clients} families.
+
+Client list:
+{client_list} 
