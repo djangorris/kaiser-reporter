@@ -88,31 +88,24 @@ the_msg['From'] = from_email
 
 ###
 file_ = 'templates/email_message.txt'
-# file_html = 'templates/email_message.html'
+file_html = 'templates/email_message.html'
 template = get_template(file_)
-# template_html = get_template(file_html)
+template_html = get_template(file_html)
 context = {
     "num_clients": num_clients,
     "client_list": client_list,
 }
-###
 
+rendered_text = render_context(template, context)
+rendered_html = render_context(template_html, context)
 
-# plain_txt = "There are {} families.".format(num_clients)
-# html_txt = '''\
-# <html>
-#     <head></head>
-#     <body>
-#         <p>"Testing."</p>
-#     </body>
-# </html>
-# '''
-# part_1 = MIMEText(file_, 'plain')
-# the_msg.attach(part_1)
-# the_msg.attach(part_2)
-the_msg = render_context(template, context)
+part_1 = MIMEText(rendered_text, 'plain')
+part_2 = MIMEText(rendered_html, "html")
+the_msg.attach(part_1)
+the_msg.attach(part_2)
+# the_msg = render_context(template, context)
 # the_msg = render_context(template_html, context)
-email_conn.sendmail(from_email, to_list, the_msg)
+email_conn.sendmail(from_email, to_list, the_msg.as_string())
 email_conn.quit()
 # except smtplib.SMTPException:
 #     print("error sending message")
