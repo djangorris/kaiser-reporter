@@ -15,7 +15,3 @@ def get_template(path):
 
 def render_context(template_string, context):
     return template_string.format(**context)
-
-
-# print(render_context(template, context))
-# print(render_context(template_html, context))
