@@ -1,4 +1,4 @@
-There are {num_clients} families.
+There are {new_num_clients} families in the new list.
 
 New client list:
 {new_list} 

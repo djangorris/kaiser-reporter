@@ -28,14 +28,14 @@ scroll_add_new_to_list(driver, new_list)
 
 scroll_add_new_to_list(driver, new_list)
 
-# change to new_num_clients
-num_clients = len(new_list)
+new_num_clients = len(new_list)
 
 create_newFile(new_list)
 
 # number difference b/w old_num_clients & new_num_clients as num_client_difference
 # make list of added or removed clients
+
 # count the total number of clients by accessing the number of/
 # family members 
 
-send_the_email(new_list, num_clients)
+send_the_email(new_list, new_num_clients)
