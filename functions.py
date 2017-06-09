@@ -20,7 +20,8 @@ from secret import kaiser_username, kaiser_password, host, port, username, passw
 from templates import get_template_path, get_template, render_context
 
 
-def kaiser_login(driver):	
+def kaiser_login(driver):
+	time.sleep(4)
 	email = driver.find_element_by_id('email')
 	email.send_keys(kaiser_username)
 	time.sleep(1)
@@ -34,15 +35,15 @@ def kaiser_login(driver):
 	bob.click()
 	time.sleep(3)
 
-def initialize_list(driver, client_list):
+def initialize_list(driver, new_list):
 	html = driver.execute_script("return document.documentElement.outerHTML")
 	sel_soup = BeautifulSoup(html, 'html.parser')
 	clients = sel_soup.find_all("div", class_="name")
 	for client in clients:
 	    title = client.find_all('a', {'class': 'ng-binding'})[0].text.strip(" /n/t/r\n")
-	    client_list.append(title)
+	    new_list.append(title)
 
-def scroll_add_new_to_list(driver, client_list):
+def scroll_add_new_to_list(driver, new_list):
 	time.sleep(1)
 	driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 	html = driver.execute_script("return document.documentElement.outerHTML")
@@ -50,10 +51,10 @@ def scroll_add_new_to_list(driver, client_list):
 	clients = sel_soup.find_all("div", class_="name")
 	for client in clients:
 	    title = client.find_all('a', {'class': 'ng-binding'})[0].text.strip(" /n/t/r\n")
-	    if title not in client_list:
-	        client_list.append(title)
+	    if title not in new_list:
+	        new_list.append(title)
 
-def send_the_email(client_list, num_clients):
+def send_the_email(new_list, num_clients):
 	# try:
 	email_conn = smtplib.SMTP(host, port)
 	email_conn.ehlo()
@@ -69,7 +70,7 @@ def send_the_email(client_list, num_clients):
 	template_html = get_template(file_html)
 	context = {
 	    "num_clients": num_clients,
-	    "client_list": client_list,
+	    "new_list": new_list,
 	}
 
 	rendered_text = render_context(template, context)
