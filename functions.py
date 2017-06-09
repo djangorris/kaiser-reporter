@@ -53,7 +53,7 @@ def scroll_add_new_to_list(driver, client_list):
 	    if title not in client_list:
 	        client_list.append(title)
 
-def email_list(client_list, num_clients):
+def send_the_email(client_list, num_clients):
 	# try:
 	email_conn = smtplib.SMTP(host, port)
 	email_conn.ehlo()
