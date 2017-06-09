@@ -26,6 +26,7 @@ secret.py
 
 # Logs and databases etc #
 ######################
+*.csv
 *.log
 *.sql
 *.sqlite

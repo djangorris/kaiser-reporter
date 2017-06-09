@@ -1,5 +1,8 @@
+import csv
 import os
 import shutil
+import smtplib
+import time
 from bs4 import BeautifulSoup
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
@@ -12,9 +15,7 @@ from selenium.common.exceptions import NoAlertPresentException
 from selenium.webdriver.chrome.options import Options
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-import smtplib
 from smtplib import SMTP, SMTPAuthenticationError, SMTPException
-import time
 
 from secret import kaiser_username, kaiser_password, host, port, username, password, from_email, to_list
 from templates import get_template_path, get_template, render_context
@@ -84,3 +85,9 @@ def send_the_email(new_list, num_clients):
 	email_conn.quit()
 	# except smtplib.SMTPException:
 	#     print("error sending message")
+
+def create_newFile(new_list):
+	with open("new_file.csv", 'w') as newFile:
+		wr = csv.writer(newFile)
+		for client in new_list:
+			wr.writerow([client])

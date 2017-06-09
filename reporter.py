@@ -1,6 +1,6 @@
 from selenium import webdriver
 
-from functions import scroll_add_new_to_list, kaiser_login, initialize_list, send_the_email
+from functions import scroll_add_new_to_list, kaiser_login, initialize_list, send_the_email, create_newFile
 
 url = "https://clear.kaiserpermanente.org/?kp_shortcut_referrer=kp.org/clear#/login"
 driver = webdriver.Firefox()
@@ -24,6 +24,9 @@ scroll_add_new_to_list(driver, new_list)
 
 # change to new_num_clients
 num_clients = len(new_list)
+
+create_newFile(new_list)
+
 # number difference b/w old_num_clients & new_num_clients as num_client_difference
 # make list of added or removed clients
 # count the total number of clients by accessing the number of/
