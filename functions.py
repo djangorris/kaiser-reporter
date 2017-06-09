@@ -19,7 +19,7 @@ from smtplib import SMTP, SMTPAuthenticationError, SMTPException
 
 from secret import kaiser_username, kaiser_password, host, port, username, password, from_email, to_list
 from templates import get_template_path, get_template, render_context
-
+	
 
 def kaiser_login(driver):
 	time.sleep(4)
