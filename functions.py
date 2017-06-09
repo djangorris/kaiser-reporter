@@ -21,6 +21,12 @@ from secret import kaiser_username, kaiser_password, host, port, username, passw
 from templates import get_template_path, get_template, render_context
 	
 
+def old_file_csv_to_list():
+	with open('old_file.csv', 'r') as f:
+	    reader = csv.reader(f)
+	    old_list = list(reader)
+	    return(old_list)
+
 def kaiser_login(driver):
 	time.sleep(4)
 	email = driver.find_element_by_id('email')
@@ -61,7 +67,7 @@ def create_newFile(new_list):
 		for client in new_list:
 			wr.writerow([client])
 
-def send_the_email(new_list, new_num_clients):
+def send_the_email(old_list, old_num_clients, new_list, new_num_clients):
 	# try:
 	email_conn = smtplib.SMTP(host, port)
 	email_conn.ehlo()
@@ -76,6 +82,8 @@ def send_the_email(new_list, new_num_clients):
 	template = get_template(file_)
 	template_html = get_template(file_html)
 	context = {
+		"old_num_clients": old_num_clients,
+	    "old_list": old_list,
 	    "new_num_clients": new_num_clients,
 	    "new_list": new_list,
 	}

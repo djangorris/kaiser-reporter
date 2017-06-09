@@ -1,4 +1,9 @@
 There are {new_num_clients} families in the new list.
+~ ~ ~ ~
+There were {old_num_clients} families in the previous report.
 
-New client list:
+Here is the new client list:
 {new_list} 
+
+Here is the old client list:
+{old_list}
