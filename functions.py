@@ -54,6 +54,12 @@ def scroll_add_new_to_list(driver, new_list):
 	    title = client.find_all('a', {'class': 'ng-binding'})[0].text.strip(" /n/t/r\n")
 	    if title not in new_list:
 	        new_list.append(title)
+	        
+def create_newFile(new_list):
+	with open("new_file.csv", 'w') as newFile:
+		wr = csv.writer(newFile)
+		for client in new_list:
+			wr.writerow([client])
 
 def send_the_email(new_list, num_clients):
 	# try:
@@ -86,8 +92,3 @@ def send_the_email(new_list, num_clients):
 	# except smtplib.SMTPException:
 	#     print("error sending message")
 
-def create_newFile(new_list):
-	with open("new_file.csv", 'w') as newFile:
-		wr = csv.writer(newFile)
-		for client in new_list:
-			wr.writerow([client])

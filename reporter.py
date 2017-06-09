@@ -1,6 +1,12 @@
 from selenium import webdriver
 
-from functions import scroll_add_new_to_list, kaiser_login, initialize_list, send_the_email, create_newFile
+from functions import (
+	kaiser_login,
+	initialize_list,
+	scroll_add_new_to_list,
+	create_newFile,
+	send_the_email,
+	)
 
 url = "https://clear.kaiserpermanente.org/?kp_shortcut_referrer=kp.org/clear#/login"
 driver = webdriver.Firefox()
