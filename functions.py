@@ -22,10 +22,8 @@ from templates import get_template_path, get_template, render_context
 	
 
 def old_file_csv_to_list():
-	with open('old_file.csv', 'r') as f:
-	    reader = csv.reader(f)
-	    old_list = list(reader)
-	    return(old_list)
+    with open('old_file.csv', 'r') as f:
+        return f.read().splitlines()
 
 def kaiser_login(driver):
 	time.sleep(4)
@@ -62,10 +60,8 @@ def scroll_add_new_to_list(driver, new_list):
 	        new_list.append(title)
 
 def create_newFile(new_list):
-	with open("new_file.csv", 'w') as newFile:
-		wr = csv.writer(newFile)
-		for client in new_list:
-			wr.writerow([client])
+    with open("new_file.csv", 'w') as newFile:
+        newFile.write('\n'.join(new_list))
 
 def send_the_email(old_list, old_num_clients, new_list, new_num_clients):
 	# try:
@@ -87,10 +83,8 @@ def send_the_email(old_list, old_num_clients, new_list, new_num_clients):
 	    "new_num_clients": new_num_clients,
 	    "new_list": new_list,
 	}
-
 	rendered_text = render_context(template, context)
 	rendered_html = render_context(template_html, context)
-
 	part_1 = MIMEText(rendered_text, 'plain')
 	part_2 = MIMEText(rendered_html, "html")
 	the_msg.attach(part_1)
@@ -99,4 +93,3 @@ def send_the_email(old_list, old_num_clients, new_list, new_num_clients):
 	email_conn.quit()
 	# except smtplib.SMTPException:
 	#     print("error sending message")
-
