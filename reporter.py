@@ -35,15 +35,13 @@ scroll_add_new_to_list(driver, new_list)
 
 new_num_clients = len(new_list)
 
+added = [i for i in new_list if i not in old_list]
+
+removed = [i for i in old_list if i not in new_list]
+
 create_newFile(new_list)
-
-# number difference b/w old_num_clients & new_num_clients as num_client_difference
-
-# make list of added or removed clients
-
-# use variation of compare.py to show added and removed clients
 
 # LAST FEATURE: count the total number of clients by accessing the number of/
 # family members 
 
-send_the_email(old_list, old_num_clients, new_list, new_num_clients)
+send_the_email(old_list, old_num_clients, new_list, new_num_clients, added, removed)

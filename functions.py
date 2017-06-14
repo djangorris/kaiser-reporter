@@ -59,11 +59,17 @@ def scroll_add_new_to_list(driver, new_list):
 	    if title not in new_list:
 	        new_list.append(title)
 
+# def added_clients(old_list, new_list):
+# 	return set(new_list) - set(old_list)
+
+# def removed_clients(old_list, new_list):
+# 	return (set(old_list) or set(new_list)) - set(new_list)
+
 def create_newFile(new_list):
     with open("new_file.csv", 'w') as newFile:
         newFile.write('\n'.join(new_list))
 
-def send_the_email(old_list, old_num_clients, new_list, new_num_clients):
+def send_the_email(old_list, old_num_clients, new_list, new_num_clients, added, removed):
 	# try:
 	email_conn = smtplib.SMTP(host, port)
 	email_conn.ehlo()
@@ -82,6 +88,8 @@ def send_the_email(old_list, old_num_clients, new_list, new_num_clients):
 	    "old_list": old_list,
 	    "new_num_clients": new_num_clients,
 	    "new_list": new_list,
+	    "added": added,
+	    "removed": removed,
 	}
 	rendered_text = render_context(template, context)
 	rendered_html = render_context(template_html, context)
