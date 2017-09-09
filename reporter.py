@@ -45,3 +45,4 @@ create_newFile(new_list)
 # family members 
 
 send_the_email(old_list, old_num_clients, new_list, new_num_clients, added, removed)
+driver.quit()
